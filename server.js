@@ -8,6 +8,8 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
 
 //routers
 import jobRouter from "./routes/jobRouter.js";
@@ -22,6 +24,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
+app.use(mongoSanitize());
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
